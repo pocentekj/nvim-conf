@@ -16,7 +16,12 @@ vim.opt.rtp:prepend(lazypath)
 -- ===============================
 require("lazy").setup({
   -- UI & Navigation
-  { "preservim/nerdtree" },
+  { 
+    "preservim/nerdtree",
+    config = function()
+      vim.g.NERDTreeShowHidden = 1
+    end,
+  },
   { "jlanzarotta/bufexplorer" },
   {
     "akinsho/bufferline.nvim",
