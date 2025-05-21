@@ -59,7 +59,7 @@ require("lazy").setup({
           transparent = true,
         }
       })
-      vim.cmd("colorscheme carbonfox")
+      vim.cmd("colorscheme terafox")
     end
   },
 })
