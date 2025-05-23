@@ -19,8 +19,14 @@ vim.opt.magic = true            -- For regular expressions turn magic on
 vim.opt.lazyredraw = true       -- Don't redraw while executing macros (good performance config)
 vim.opt.eol = true              -- Append line at the end of file
 
+-- ===============================
+-- Lazy.nvim Plugins
+-- ===============================
+require("plugins")
+
 -- Folding
-vim.opt.foldmethod = "syntax"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
@@ -32,11 +38,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.tabstop = 2
   end,
 })
-
--- ===============================
--- Lazy.nvim Plugins
--- ===============================
-require("plugins")
 
 -- ===============================
 -- Keybindings
