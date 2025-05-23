@@ -52,6 +52,7 @@ require("lazy").setup({
   { "hrsh7th/cmp-nvim-lsp" },
   { "L3MON4D3/LuaSnip" },
   { "onsails/lspkind-nvim" },
+  { "nvim-treesitter/nvim-treesitter" },
 
   -- Theme
   {
