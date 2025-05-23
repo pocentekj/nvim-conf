@@ -15,7 +15,7 @@ lspconfig.pyright.setup({
       for _, path in ipairs(paths) do
         if vim.fn.executable(path) == 1 then return path end
       end
-      local fallback = "/home/chester/.local/share/lsp-python-tools/bin/python"
+      local fallback = os.getenv("HOME") .. "/.local/share/lsp-python-tools/bin/python"
       if vim.fn.executable(fallback) == 1 then return fallback end
       return "python3"
     end
@@ -34,7 +34,7 @@ local function get_node_bin_path(root_dir, bin)
   if vim.fn.executable(local_bin) == 1 then
     return local_bin
   end
-  return "/home/chester/.local/share/lsp-node-tools/node_modules/.bin/" .. bin
+  return os.getenv("HOME") .. "/.local/share/lsp-node-tools/node_modules/.bin/" .. bin
 end
 
 lspconfig.ts_ls.setup({

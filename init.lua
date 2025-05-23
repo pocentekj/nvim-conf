@@ -24,12 +24,6 @@ vim.opt.eol = true              -- Append line at the end of file
 -- ===============================
 require("plugins")
 
--- Folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
-
 -- Filetype-specific indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "html", "css", "javascript", "typescript", "lua", "yaml", "json" },
@@ -68,3 +62,14 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- LSP Setup
 -- ===============================
 require("completion")
+
+-- ===============================
+-- Folding - delay until Tree-sitter is ready
+-- ===============================
+vim.defer_fn(function()
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  vim.opt.foldlevelstart = 99
+  vim.opt.foldenable = true
+  vim.cmd("normal! zx")
+end, 50)
