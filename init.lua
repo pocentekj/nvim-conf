@@ -19,6 +19,7 @@ vim.opt.magic = true            -- For regular expressions turn magic on
 vim.opt.lazyredraw = true       -- Don't redraw while executing macros (good performance config)
 vim.opt.eol = true              -- Append line at the end of file
 vim.opt.so = 7                  -- Scroll offset when moving vertically
+vim.opt.ttimeoutlen = 10        -- Reduce delay after pressing Esc in insert mode
 
 -- Display warning/error messages inline
 vim.diagnostic.config({ virtual_text = true })
