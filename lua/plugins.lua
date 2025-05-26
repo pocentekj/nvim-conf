@@ -22,7 +22,6 @@ require("lazy").setup({
       vim.g.NERDTreeShowHidden = 1
     end,
   },
-  { "jlanzarotta/bufexplorer" },
   {
     "akinsho/bufferline.nvim",
     version = "*",
