@@ -66,16 +66,27 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- ===============================
--- Folding - delay until Tree-sitter is ready
--- ===============================
-vim.defer_fn(function()
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-  vim.opt.foldlevelstart = 99
-  vim.opt.foldenable = true
-  vim.cmd("normal! zx")
-end, 50)
+-- Enable folds when parser is ready
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function(args)
+    local ts_parsers = require("nvim-treesitter.parsers")
+    local lang = vim.bo[args.buf].filetype
+
+    -- Confirm Tree-sitter supports this filetype
+    if ts_parsers.has_parser(lang) then
+      local parser = ts_parsers.get_parser(args.buf, lang)
+      if parser then
+        vim.schedule(function()
+          vim.api.nvim_buf_set_option(args.buf, "foldmethod", "expr")
+          vim.api.nvim_buf_set_option(args.buf, "foldexpr", "nvim_treesitter#foldexpr()")
+          vim.api.nvim_buf_set_option(args.buf, "foldenable", true)
+          vim.api.nvim_buf_set_option(args.buf, "foldlevel", 99)
+          vim.cmd("normal! zx")
+        end)
+      end
+    end
+  end,
+})
 
 -- ===============================
 -- Keybindings

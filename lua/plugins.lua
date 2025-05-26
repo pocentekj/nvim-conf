@@ -54,6 +54,7 @@ require("lazy").setup({
   { "onsails/lspkind-nvim" },
   { 
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -71,7 +72,7 @@ require("lazy").setup({
         },
         highlight = { enable = true },
         indent = { enable = true },
-        folding = { enable = true },
+        folds = { enable = true },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -111,3 +112,6 @@ require("lazy").setup({
     end
   },
 })
+
+require("nvim-treesitter.install").prefer_git = true
+require("nvim-treesitter.configs")
