@@ -46,6 +46,8 @@ vim.keymap.set("n", "<C-h>", "<Cmd>noh<CR>", { desc = "Clear search highlights" 
 vim.keymap.set("n", "<leader>zo", "<Cmd>foldopen<CR>", { desc = "Open fold" })
 vim.keymap.set("n", "<leader>zc", "<Cmd>foldclose<CR>", { desc = "Close fold" })
 vim.keymap.set("n", "<leader>zR", "<Cmd>foldtoggle<CR>", { desc = "Toggle fold" })
+-- NERDTree
+vim.keymap.set('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
 
 -- ===============================
 -- Custom commands
@@ -86,3 +88,5 @@ vim.defer_fn(function()
   vim.opt.foldenable = true
   vim.cmd("normal! zx")
 end, 50)
+
+vim.diagnostic.config({ virtual_text = true })
