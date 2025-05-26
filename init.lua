@@ -20,10 +20,8 @@ vim.opt.lazyredraw = true       -- Don't redraw while executing macros (good per
 vim.opt.eol = true              -- Append line at the end of file
 vim.opt.so = 7                  -- Scroll offset when moving vertically
 
--- ===============================
--- Lazy.nvim Plugins
--- ===============================
-require("plugins")
+-- Display warning/error messages inline
+vim.diagnostic.config({ virtual_text = true })
 
 -- Filetype-specific indentation
 vim.api.nvim_create_autocmd("FileType", {
@@ -35,19 +33,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- ===============================
--- Keybindings
+-- Lazy.nvim Plugins
 -- ===============================
--- Buffer tabs navigation
-vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
--- Search
-vim.keymap.set("n", "<C-h>", "<Cmd>noh<CR>", { desc = "Clear search highlights" })
--- Folding/unfolding
-vim.keymap.set("n", "<leader>zo", "<Cmd>foldopen<CR>", { desc = "Open fold" })
-vim.keymap.set("n", "<leader>zc", "<Cmd>foldclose<CR>", { desc = "Close fold" })
-vim.keymap.set("n", "<leader>zR", "<Cmd>foldtoggle<CR>", { desc = "Toggle fold" })
--- NERDTree
-vim.keymap.set('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
+require("plugins")
+
+-- ===============================
+-- LSP Setup
+-- ===============================
+require("completion")
 
 -- ===============================
 -- Custom commands
@@ -74,11 +67,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 -- ===============================
--- LSP Setup
--- ===============================
-require("completion")
-
--- ===============================
 -- Folding - delay until Tree-sitter is ready
 -- ===============================
 vim.defer_fn(function()
@@ -89,4 +77,17 @@ vim.defer_fn(function()
   vim.cmd("normal! zx")
 end, 50)
 
-vim.diagnostic.config({ virtual_text = true })
+-- ===============================
+-- Keybindings
+-- ===============================
+-- Buffer tabs navigation
+vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
+-- Search
+vim.keymap.set("n", "<C-h>", "<Cmd>noh<CR>", { desc = "Clear search highlights" })
+-- Folding/unfolding
+vim.keymap.set("n", "<leader>zo", "<Cmd>foldopen<CR>", { desc = "Open fold" })
+vim.keymap.set("n", "<leader>zc", "<Cmd>foldclose<CR>", { desc = "Close fold" })
+vim.keymap.set("n", "<leader>zR", "<Cmd>foldtoggle<CR>", { desc = "Toggle fold" })
+-- NERDTree
+vim.keymap.set('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })

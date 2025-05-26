@@ -71,6 +71,7 @@ require("lazy").setup({
         },
         highlight = { enable = true },
         indent = { enable = true },
+        folding = { enable = true },
         incremental_selection = {
           enable = true,
           keymaps = {
