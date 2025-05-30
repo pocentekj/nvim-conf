@@ -15,6 +15,20 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -- ===============================
 require("lazy").setup({
+  -- Theme
+  {
+    "sainnhe/gruvbox-material",
+    config = function()
+      vim.g.gruvbox_material_background = 'hard'
+      vim.g.gruvbox_material_foreground = 'material'
+      vim.g.gruvbox_material_enable_bold = 1
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_material_transparent_background = 1
+      vim.cmd("colorscheme gruvbox-material")
+    end,
+    priority = 1000, -- Ensures this colorscheme loads first!
+  },
   -- UI & Navigation
   {
     "preservim/nerdtree",
@@ -48,7 +62,7 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          theme = 'dracula', -- or any theme you prefer
+          theme = 'gruvbox-material',
           icons_enabled = true,
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
@@ -127,21 +141,6 @@ require("lazy").setup({
         },
       })
     end,
-  },
-
-  -- Theme
-  {
-    "EdenEast/nightfox.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("nightfox").setup({
-        options = {
-          transparent = true,
-        }
-      })
-      vim.cmd("colorscheme terafox")
-    end
   },
 })
 
