@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 -- ===============================
 require("lazy").setup({
   -- UI & Navigation
-  { 
+  {
     "preservim/nerdtree",
     config = function()
       vim.g.NERDTreeShowHidden = 1
@@ -41,6 +41,39 @@ require("lazy").setup({
       })
     end,
   },
+  { "kyazdani42/nvim-web-devicons" },
+  { "nvim-tree/nvim-web-devicons" },
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = 'dracula', -- or any theme you prefer
+          icons_enabled = true,
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_a = {'mode'},
+          lualine_b = {'branch', 'diff', 'diagnostics'},
+          lualine_c = {'filename'},
+          lualine_x = {'encoding', 'fileformat', 'filetype'},
+          lualine_y = {'progress'},
+          lualine_z = {'location'}
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {'filename'},
+          lualine_x = {'location'},
+          lualine_y = {},
+          lualine_z = {}
+        },
+        tabline = {},
+        extensions = {}
+      })
+    end
+  },
 
   -- GIT integration
   { "lewis6991/gitsigns.nvim" },
@@ -51,16 +84,16 @@ require("lazy").setup({
   { "hrsh7th/cmp-nvim-lsp" },
   { "L3MON4D3/LuaSnip" },
   { "onsails/lspkind-nvim" },
-  { 
+  {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
-          "lua", 
-          "python", 
-          "javascript", 
+          "lua",
+          "python",
+          "javascript",
           "typescript",
           "html",
           "css",
@@ -114,3 +147,4 @@ require("lazy").setup({
 
 require("nvim-treesitter.install").prefer_git = true
 require("nvim-treesitter.configs")
+
