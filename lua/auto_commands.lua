@@ -2,13 +2,13 @@
 -- Auto commands
 -- ===============================
 -- Open NERDTree
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      vim.cmd("NERDTree | wincmd p")
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     if vim.fn.argc() == 0 then
+--       vim.cmd("NERDTree | wincmd p")
+--     end
+--   end,
+-- })
 
 -- Enable folds when parser is ready
 vim.api.nvim_create_autocmd("BufEnter", {
