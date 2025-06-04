@@ -15,6 +15,21 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -- ===============================
 require("lazy").setup({
+  -- Misc
+  { "nvim-tree/nvim-web-devicons" },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
   -- Theme
   {
     "sainnhe/gruvbox-material",
@@ -55,8 +70,6 @@ require("lazy").setup({
       })
     end,
   },
-  { "kyazdani42/nvim-web-devicons" },
-  { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-lualine/lualine.nvim",
     config = function()
