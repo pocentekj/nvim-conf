@@ -32,21 +32,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- Strip trimming whitespace and ensure newline at end of file
+-- Remove trailing whitespace
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
     local curpos = vim.api.nvim_win_get_cursor(0)
-
     -- Remove trailing whitespace
     vim.cmd([[%s/\s\+$//e]])
-
-    -- Ensure file ends with a newline (if not already)
-    local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, false)[1] or ""
-    if last_line ~= "" then
-      vim.api.nvim_buf_set_lines(0, -1, -1, false, { "" })
-    end
-
     vim.api.nvim_win_set_cursor(0, curpos)
   end,
 })
