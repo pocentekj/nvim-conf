@@ -8,6 +8,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.pyright.setup({
   before_init = function(_, config)
     local function get_python_path(workspace)
+      if not workspace then
+        workspace = ""
+      end
       local paths = {
         workspace .. "/.venv/bin/python",
         workspace .. "/venv/bin/python",
