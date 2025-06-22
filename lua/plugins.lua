@@ -18,6 +18,11 @@ require("lazy").setup({
   -- Misc
   { "nvim-tree/nvim-web-devicons" },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     keys = {
