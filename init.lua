@@ -39,11 +39,6 @@ vim.api.nvim_create_autocmd("FileType", {
 require("plugins")
 
 -- ===============================
--- LSP Setup
--- ===============================
-require("completion")
-
--- ===============================
 -- Custom commands
 -- ===============================
 require("commands")
@@ -72,4 +67,3 @@ vim.keymap.set('n', '<C-s>', function()
   vim.cmd('NERDTreeClose')
   vim.cmd('mksession!')
 end, { noremap = true, silent = true })
-
