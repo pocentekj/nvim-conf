@@ -80,11 +80,6 @@ lspconfig.rust_analyzer.setup({
 -- C/C++
 lspconfig.clangd.setup({ capabilities = capabilities })
 
--- Kotlin
-lspconfig.kotlin_language_server.setup({
-  cmd = { "/usr/bin/kotlin-language-server" },
-})
-
 -- ===============================
 -- Completion
 -- ===============================
