@@ -57,13 +57,7 @@ lspconfig.ts_ls.setup({
 })
 
 lspconfig.html.setup({
-  on_new_config = function(new_config, root_dir)
-    new_config.cmd = {
-      get_node_bin_path(root_dir, "vscode-html-language-server"),
-      "--stdio",
-    }
-  end,
-  capabilities = capabilities,
+  cmd = { "vscode-html-language-server", "--stdio" },
 })
 
 -- Rust
