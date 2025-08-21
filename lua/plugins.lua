@@ -35,20 +35,29 @@ require("lazy").setup({
       },
     },
   },
-  -- Theme
+
+  -- Theme: Tokyo Night
   {
-    "sainnhe/gruvbox-material",
-    config = function()
-      vim.g.gruvbox_material_background = 'hard'
-      vim.g.gruvbox_material_foreground = 'material'
-      vim.g.gruvbox_material_enable_bold = 1
-      vim.g.gruvbox_material_enable_italic = 1
-      vim.g.gruvbox_material_better_performance = 1
-      vim.g.gruvbox_material_transparent_background = 1
-      vim.cmd("colorscheme gruvbox-material")
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "moon", -- "storm", "night", "moon", "day"
+      transparent = true,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
     end,
-    priority = 1000, -- Ensures this colorscheme loads first!
   },
+
   -- UI & Navigation
   {
     "preservim/nerdtree",
@@ -80,7 +89,7 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          theme = 'gruvbox-material',
+          theme = "tokyonight",
           icons_enabled = true,
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
@@ -164,4 +173,3 @@ require("lazy").setup({
 
 require("nvim-treesitter.install").prefer_git = true
 require("nvim-treesitter.configs")
-
