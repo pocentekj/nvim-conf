@@ -162,6 +162,49 @@ require("lazy").setup({
       })
     end,
   },
+  -- Telescope + extras
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.6",  -- stay pinned; upgrade intentionally later
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzy-native.nvim", build = "make" },
+      "nvim-telescope/telescope-ui-select.nvim",
+    },
+    keys = {
+      { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Telescope: Find files" },
+      { "<leader>fg", function() require("telescope.builtin").live_grep()  end, desc = "Telescope: Live grep" },
+      { "<leader>fb", function() require("telescope.builtin").buffers()    end, desc = "Telescope: Buffers" },
+      { "<leader>fh", function() require("telescope.builtin").help_tags()  end, desc = "Telescope: Help tags" },
+      { "<leader>fo", function() require("telescope.builtin").oldfiles()   end, desc = "Telescope: Recent files" },
+      { "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Telescope: Doc symbols" },
+    },
+    config = function()
+      local telescope = require("telescope")
+      telescope.setup({
+        defaults = {
+          layout_config = { prompt_position = "top" },
+          sorting_strategy = "ascending",
+          winblend = 10,
+          mappings = {
+            i = {
+              ["<C-j>"] = "move_selection_next",
+              ["<C-k>"] = "move_selection_previous",
+            },
+          },
+        },
+        pickers = {
+          find_files = { hidden = true, follow = true },
+        },
+        extensions = {
+          ["ui-select"] = { require("telescope.themes").get_dropdown({}) },
+        },
+      })
+      -- Load extensions
+      pcall(telescope.load_extension, "fzy_native")
+      pcall(telescope.load_extension, "ui-select")
+    end,
+  },
 })
 
 require("nvim-treesitter.install").prefer_git = true
