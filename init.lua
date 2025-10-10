@@ -72,4 +72,3 @@ vim.keymap.set('n', '<C-s>', function()
   vim.cmd('NERDTreeClose')
   vim.cmd('mksession!')
 end, { noremap = true, silent = true })
-
