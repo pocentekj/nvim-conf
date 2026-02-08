@@ -112,56 +112,6 @@ require("lazy").setup({
   -- GIT integration
   { "lewis6991/gitsigns.nvim" },
 
-  -- LSP & Completion
-  { "neovim/nvim-lspconfig" },
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "L3MON4D3/LuaSnip" },
-  { "onsails/lspkind-nvim" },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "lua",
-          "python",
-          "javascript",
-          "typescript",
-          "html",
-          "css",
-          "rust",
-          "json",
-          "c",
-          "cpp",
-        },
-        highlight = { enable = true },
-        indent = { enable = true },
-        folds = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            node_decremental = "<bs>",
-          },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["af"] = "@class.inner",
-            },
-          },
-        },
-      })
-    end,
-  },
   -- Telescope + extras
   {
     "nvim-telescope/telescope.nvim",
@@ -206,6 +156,3 @@ require("lazy").setup({
     end,
   },
 })
-
-require("nvim-treesitter.install").prefer_git = true
-require("nvim-treesitter.configs")

@@ -26,7 +26,20 @@ vim.diagnostic.config({ virtual_text = true })
 
 -- Filetype-specific indentation
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "html", "css", "javascript", "typescript", "lua", "yaml", "json" },
+  pattern = {
+    "c",
+    "html",
+    "css",
+    "sass",
+    "less",
+    "javascript",
+    "typescript",
+    "lua",
+    "yaml",
+    "json",
+    "bash",
+    "zsh",
+  },
   callback = function()
     vim.opt_local.shiftwidth = 2
     vim.opt_local.tabstop = 2
@@ -39,11 +52,6 @@ vim.api.nvim_create_autocmd("FileType", {
 require("plugins")
 
 -- ===============================
--- LSP Setup
--- ===============================
-require("completion")
-
--- ===============================
 -- Custom commands
 -- ===============================
 require("commands")
@@ -54,21 +62,6 @@ require("commands")
 require("auto_commands")
 
 -- ===============================
--- Keybindings
+-- Key bindings
 -- ===============================
--- Buffer tabs navigation
-vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
--- Search
-vim.keymap.set("n", "<C-h>", "<Cmd>noh<CR>", { desc = "Clear search highlights" })
--- Folding/unfolding
-vim.keymap.set("n", "<leader>zo", "<Cmd>foldopen<CR>", { desc = "Open fold" })
-vim.keymap.set("n", "<leader>zc", "<Cmd>foldclose<CR>", { desc = "Close fold" })
-vim.keymap.set("n", "<leader>zR", "<Cmd>foldtoggle<CR>", { desc = "Toggle fold" })
--- NERDTree
-vim.keymap.set('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
--- Session management
-vim.keymap.set('n', '<C-s>', function()
-  vim.cmd('NERDTreeClose')
-  vim.cmd('mksession!')
-end, { noremap = true, silent = true })
+require("keybindings")
