@@ -1,3 +1,5 @@
+vim.g.nvim_profile = vim.env.NVIM_PROFILE or "base"
+
 -- ===============================
 -- Options
 -- ===============================
@@ -65,3 +67,10 @@ require("auto_commands")
 -- Key bindings
 -- ===============================
 require("keybindings")
+
+-- ===============================
+-- LSP
+-- ===============================
+if vim.g.nvim_profile == "full" then
+  require("lsp")
+end

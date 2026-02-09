@@ -1,3 +1,5 @@
+local is_full = (vim.g.nvim_profile == "full")
+
 -- ===============================
 -- Lazy.nvim Bootstrap
 -- ===============================
@@ -14,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 -- ===============================
 -- Plugins
 -- ===============================
-require("lazy").setup({
+local plugins = {
   -- Misc
   { "nvim-tree/nvim-web-devicons" },
   {
@@ -155,4 +157,17 @@ require("lazy").setup({
       pcall(telescope.load_extension, "ui-select")
     end,
   },
-})
+}
+
+if is_full then
+  table.insert(plugins, {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+    },
+  })
+end
+
+require("lazy").setup(plugins)
