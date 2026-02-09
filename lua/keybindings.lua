@@ -31,11 +31,9 @@ vim.keymap.set("n", "<C-b>", function()
     -- OFF
     vim.wo.wrap = false
     vim.wo.linebreak = false
-    vim.wo.breakindent = false
   else
     -- ON
     vim.wo.wrap = true
     vim.wo.linebreak = true
-    vim.wo.breakindent = true
   end
 end, { desc = "Toggle wrap + linebreak" })
