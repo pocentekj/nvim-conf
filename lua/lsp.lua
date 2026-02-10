@@ -46,6 +46,7 @@ do
 
   vim.lsp.config("pyright", {
     cmd = { pyright, "--stdio" },
+    filetypes = { "python" },
     capabilities = capabilities,
     settings = {
       python = {
