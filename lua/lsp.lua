@@ -159,10 +159,9 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Enable diagnostics
 -- =========================
 vim.diagnostic.config({
-  virtual_text = {
-    spacing = 2,
-    prefix = "●",
-  },
+  virtual_text = false,
+  underline = true,
+  signs = true,
   float = {
     border = "rounded",
   },
