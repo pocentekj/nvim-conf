@@ -126,6 +126,59 @@ local function setup_ts()
 end
 
 -- =========================
+-- CSS / LESS / SCSS
+-- =========================
+local function setup_cssls()
+  -- preferuj lokalny bin, fallback na PATH
+  local local_bin = vim.fn.getcwd() .. "/node_modules/.bin/vscode-css-language-server"
+  local bin = (vim.fn.executable(local_bin) == 1) and local_bin or vim.fn.exepath("vscode-css-language-server")
+
+  if bin == "" then
+    vim.notify("CSS LSP: install vscode-langservers-extracted (vscode-css-language-server)", vim.log.levels.WARN)
+    return
+  end
+
+  vim.lsp.config("cssls", {
+    cmd = { bin, "--stdio" },
+    filetypes = { "css", "scss", "less" },
+    root_markers = { "package.json", ".git" },
+    capabilities = lsp_capabilities(),
+  })
+
+  vim.lsp.enable("cssls")
+end
+
+-- =========================
+-- JSON
+-- =========================
+local function setup_jsonls()
+  local local_bin = vim.fn.getcwd() .. "/node_modules/.bin/vscode-json-language-server"
+  local bin = (vim.fn.executable(local_bin) == 1) and local_bin or vim.fn.exepath("vscode-json-language-server")
+
+  if bin == "" then
+    vim.notify(
+      "JSON LSP: install vscode-langservers-extracted (vscode-json-language-server)",
+      vim.log.levels.WARN
+    )
+    return
+  end
+
+  vim.lsp.config("jsonls", {
+    cmd = { bin, "--stdio" },
+    filetypes = { "json", "jsonc" },
+    root_markers = { "package.json", ".git" },
+    capabilities = lsp_capabilities(),
+    settings = {
+      json = {
+        validate = { enable = true },
+      },
+    },
+  })
+
+  vim.lsp.enable("jsonls")
+end
+
+-- =========================
 -- Initialize LSP for current buffer
 -- =========================
 local aug = vim.api.nvim_create_augroup("UserLspSetup", { clear = true })
@@ -151,6 +204,18 @@ vim.api.nvim_create_autocmd("FileType", {
     "typescriptreact",
   },
   callback = setup_ts,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  pattern = { "css", "scss", "less" },
+  callback = setup_cssls,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  pattern = { "json", "jsonc" },
+  callback = setup_jsonls,
 })
 
 -- =========================
