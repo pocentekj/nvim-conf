@@ -23,17 +23,8 @@ vim.keymap.set('n', '<C-s>', function()
   vim.cmd('mksession!')
 end, { noremap = true, silent = true })
 
--- Toggle soft-wrap + linebreak (buffer-local)
-vim.keymap.set("n", "<C-b>", function()
-  local w = vim.wo.wrap
-
-  if w then
-    -- OFF
-    vim.wo.wrap = false
-    vim.wo.linebreak = false
-  else
-    -- ON
-    vim.wo.wrap = true
-    vim.wo.linebreak = true
-  end
-end, { desc = "Toggle wrap + linebreak" })
+-- Toggle wrap lines
+vim.keymap.set("n", "<leader>z", function()
+  vim.opt_local.wrap = not vim.opt_local.wrap:get()
+  vim.opt_local.linebreak = vim.opt_local.wrap:get()
+end, { desc = "Toggle Zen wrap" })
