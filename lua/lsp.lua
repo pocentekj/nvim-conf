@@ -179,6 +179,37 @@ local function setup_jsonls()
 end
 
 -- =========================
+-- Rust
+-- =========================
+local function setup_rust_analyzer()
+  local ra = vim.fn.exepath("rust-analyzer")
+  if ra == "" then
+    vim.notify("rust-analyzer: not in PATH", vim.log.levels.ERROR)
+    return
+  end
+
+  vim.lsp.config("rust_analyzer", {
+    cmd = { ra },
+    filetypes = { "rust" },
+    root_markers = { "Cargo.toml", ".git" },
+    capabilities = lsp_capabilities(),
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+        },
+        checkOnSave = true,
+        check = {
+          command = "clippy",
+        },
+      },
+    },
+  })
+
+  vim.lsp.enable("rust_analyzer")
+end
+
+-- =========================
 -- Initialize LSP for current buffer
 -- =========================
 local aug = vim.api.nvim_create_augroup("UserLspSetup", { clear = true })
@@ -216,6 +247,12 @@ vim.api.nvim_create_autocmd("FileType", {
   group = aug,
   pattern = { "json", "jsonc" },
   callback = setup_jsonls,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  pattern = { "rust" },
+  callback = setup_rust_analyzer,
 })
 
 -- =========================
