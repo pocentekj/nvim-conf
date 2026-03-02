@@ -35,6 +35,25 @@ local function lsp_capabilities()
 end
 
 -- =========================
+-- Bash
+-- =========================
+local function setup_bashls()
+  local bin = vim.fn.exepath("bash-language-server")
+  if bin == "" then
+    vim.notify("bash-language-server not in PATH", vim.log.levels.WARN)
+    return
+  end
+
+  vim.lsp.config("bashls", {
+    cmd = { bin, "start" },
+    filetypes = { "sh", "bash" },
+    capabilities = lsp_capabilities(),
+  })
+
+  vim.lsp.enable("bashls")
+end
+
+-- =========================
 -- Python
 -- =========================
 local function setup_pyright()
@@ -213,6 +232,12 @@ end
 -- Initialize LSP for current buffer
 -- =========================
 local aug = vim.api.nvim_create_augroup("UserLspSetup", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = aug,
+  pattern = { "sh", "bash" },
+  callback = setup_bashls,
+})
 
 vim.api.nvim_create_autocmd("FileType", {
   group = aug,
