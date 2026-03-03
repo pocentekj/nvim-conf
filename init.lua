@@ -23,6 +23,11 @@ vim.opt.eol = true              -- Append line at the end of file
 vim.opt.so = 7                  -- Scroll offset when moving vertically
 vim.opt.ttimeoutlen = 10        -- Reduce delay after pressing Esc in insert mode
 
+-- Swap files and UNDO history
+vim.opt.swapfile = false
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo//"
+
 -- Filetype-specific indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
