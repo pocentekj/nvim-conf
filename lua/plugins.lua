@@ -55,9 +55,15 @@ local plugins = {
 
   -- UI & Navigation
   {
-    "preservim/nerdtree",
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      vim.g.NERDTreeShowHidden = 1
+      require("nvim-tree").setup({
+        view = { width = 32 },
+        renderer = { group_empty = true },
+        filters = { dotfiles = false },
+        git = { enable = true },
+      })
     end,
   },
   {
