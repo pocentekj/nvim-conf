@@ -1,16 +1,22 @@
+-- ===============================
+-- Profile
+--
+-- "base" - load only necessary plugins (default mode)
+-- "full" - load LSP end extra plugins (IDE mode)
+-- ===============================
 vim.g.nvim_profile = vim.env.NVIM_PROFILE or "base"
 
 -- ===============================
 -- Options
 -- ===============================
-vim.opt.expandtab = true
+vim.opt.expandtab = true        -- 4-spaces indent by default
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.smartindent = true
 vim.opt.number = true           -- Always show line numbers
 vim.opt.relativenumber = false  -- Disable relative line numbers
 vim.opt.colorcolumn = "80,120"  -- Vertical rulers
-vim.opt.termguicolors = true
+vim.opt.termguicolors = true    -- Enable 24-bit colors
 vim.opt.background = "dark"
 vim.opt.wrap = false            -- Don't wrap lines
 vim.opt.foldcolumn = "1"        -- Add a bit extra margin to the left
@@ -23,10 +29,14 @@ vim.opt.eol = true              -- Append line at the end of file
 vim.opt.so = 7                  -- Scroll offset when moving vertically
 vim.opt.ttimeoutlen = 10        -- Reduce delay after pressing Esc in insert mode
 
--- Swap files and UNDO history
-vim.opt.swapfile = false
-vim.opt.undofile = true
+-- Swap files and undo history
+vim.opt.swapfile = false        -- Disable swap files
+vim.opt.undofile = true         -- Persistent undo history
 vim.opt.undodir = vim.fn.stdpath("state") .. "/undo//"
+
+-- Disable built-in file manager - use neovim-tree instead
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Filetype-specific indentation
 vim.api.nvim_create_autocmd("FileType", {

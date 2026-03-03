@@ -165,6 +165,9 @@ local plugins = {
   },
 }
 
+-- ===============================
+-- IDE-mode Plugins
+-- ===============================
 if is_full then
   table.insert(plugins, {
     "hrsh7th/nvim-cmp",
@@ -176,4 +179,7 @@ if is_full then
   })
 end
 
+-- ===============================
+-- Init plugins
+-- ===============================
 require("lazy").setup(plugins)
